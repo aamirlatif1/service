@@ -27,6 +27,21 @@ VERSION         := 0.0.1
 SERVICE_IMAGE   := $(BASE_IMAGE_NAME)/$(SERVICE_NAME):$(VERSION)
 METRICS_IMAGE   := $(BASE_IMAGE_NAME)/$(SERVICE_NAME)-metrics:$(VERSION)
 
+# VERSION       := "0.0.1-$(shell git rev-parse --short HEAD)"
+
+# ==============================================================================
+# Building containers
+
+all: service
+
+service:
+	docker build \
+		-f zarf/docker/dockerfile.service \
+		-t $(SERVICE_IMAGE) \
+		--build-arg BUILD_REF=$(VERSION) \
+		--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
+		.
+
 dev-up:
 	kind create cluster \
 		--image $(KIND) \
@@ -37,3 +52,8 @@ dev-up:
 
 dev-down:
 	kind delete cluster --name $(KIND_CLUSTER)
+
+dev-status-all:
+	kubectl get nodes -o wide
+	kubectl get svc -o wide
+	kubectl get pods -o wide --watch --all-namespaces
