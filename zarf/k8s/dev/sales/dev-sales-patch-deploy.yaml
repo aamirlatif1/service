@@ -3,11 +3,7 @@ kind: Deployment
 metadata:
   name: sales
   namespace: sales-system
-spec:
-  selector:
-    matchLabels:
-      app: sales
-  
+spec:  
   replicas: 1
 
   strategy:

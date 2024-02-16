@@ -12,7 +12,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/aamirlatif1/service/app/debug"
+	"github.com/aamirlatif1/service/business/debug"
 	"github.com/aamirlatif1/service/foundation/logger"
 	"github.com/ardanlabs/conf/v3"
 )
@@ -61,7 +61,7 @@ func run(ctx context.Context, log *logger.Logger) error {
 			IdleTimeout        time.Duration `conf:"default:120s"`
 			ShutdownTimeout    time.Duration `conf:"default:20s,mask"`
 			APIHost            string        `conf:"default:0.0.0.0:3000"`
-			DebugHost          string        `conf:"default:0.0.0.0:4002"`
+			DebugHost          string        `conf:"default:0.0.0.0:4000"`
 			CORSAllowedOrigins []string      `conf:"default:*"`
 		}
 	}{
