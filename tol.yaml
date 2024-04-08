@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: tol
+  name: tol
+spec:
+  containers:
+  - image: nginx
+    name: tol
+    resources: {}
+    tolerations:
+    - key: "tier"
+      operator: "Equal"
+      value: "frontend"
+      effect: "NoSchedule"
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
